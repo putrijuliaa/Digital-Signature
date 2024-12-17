@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Signature with QR Code</title>
+    <!-- Link ke stylesheet eksternal -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Menggunakan font "Poppins" dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Menggunakan ikon dari Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  </head>
+  
+  <body>
+    <!-- Bagian untuk navigasi -->
+      <nav>
+        <div class="logo">Favili-♡</div>
+      </nav>
+    
+    <!-- Bagian untuk menampung seluruh konten -->
+    <div class="container">
+      
+      <!-- Section untuk Sender -->
+      <div class="card-section">
+        <h2>Sender♥</h2>
+        <div class="card sender">
+          <!-- Input untuk pesan pertama -->
+          <label for="message1">Message</label>
+          <textarea id="message1" rows="4" placeholder="Masukkan pesan pertama"></textarea>
+          <!-- Tombol untuk menghasilkan Hash dan QR Code -->
+          <button onclick="generateHashQR()">Generate Hash & QR</button>
+          
+          <!-- Menampilkan hash yang dihasilkan -->
+          <div class="hash-display" style="margin-top: 20px">
+            <strong>Hash:</strong> 
+            <span id="hash1">-</span>
+            <!-- Tombol Copy, akan tampil setelah hash di-generate -->
+            <button id="copyButton" onclick="copyToClipboard('hash1')" class="copy-btn" style="display: none; background: none; border: none; cursor: pointer;">
+              <i class="fas fa-copy"></i> <!-- Ikon Copy dari Font Awesome -->
+            </button>
+          </div>
+
+          <!-- Menampilkan QR code -->
+          <div id="qrcode1"></div>
+        </div>
+      </div>
+
+      <!-- Section untuk Verification -->
+      <div class="card-section">
+        <h2>Verification✔</h2>
+        <div class="card verification">
+          <!-- Input untuk pesan yang ingin diverifikasi -->
+          <label for="message2">Message</label>
+          <textarea id="message2" rows="4" placeholder="Masukkan pesan yang ingin diverifikasi"></textarea>
+          <!-- Input untuk hash yang diterima -->
+          <label for="hashInput">Hash yang Diterima:</label>
+          <textarea id="hashInput" rows="1" placeholder="Masukkan hash yang diterima dari sender"></textarea>
+          <!-- Tombol untuk validasi pesan -->
+          <button onclick="validateMessage()">Validate</button>
+          <!-- Menampilkan hasil validitas pesan -->
+          <div style="margin-top: 20px"><strong>Validitas:</strong> <span id="validity">Valid/Tidak valid</span></div>
+          <!-- Menampilkan hash yang benar jika hash input tidak valid -->
+          <div id="correctHash"></div> 
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-styling/lib/index.min.js"></script>
+    <!-- Library eksternal CryptoJS untuk hashing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- Library eksternal QRCodeJS untuk menghasilkan QR code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+      // Fungsi untuk menyalin hash ke clipboard
+      function copyToClipboard(elementId) {
+        const hashText = document.getElementById(elementId).innerText; 
+        navigator.clipboard.writeText(hashText).then(() => {
+          alert("Hash berhasil disalin ke clipboard!");
+        }).catch(err => {
+          alert("Gagal menyalin hash: " + err);
+        });
+      }
+
+      // Fungsi untuk membuat hash dan QR code dari pesan yang diberikan
+      function generateHashQR() {
+        const message = document.getElementById("message1").value;
+        const hash = CryptoJS.SHA256(message).toString();
+
+        document.getElementById("hash1").innerText = hash; // Menampilkan hash utuh
+
+        // Tampilkan tombol Copy setelah hash muncul
+        document.getElementById("copyButton").style.display = "inline-block";
+
+        const qrCodeDiv = document.getElementById("qrcode1");
+        qrCodeDiv.innerHTML = ""; // Hapus QR code sebelumnya
+        new QRCode(qrCodeDiv, hash); // Membuat QR code dari hash
+      }
+
+      // Fungsi untuk validasi apakah pesan yang dimasukkan menghasilkan hash yang sama dengan hash yang diterima
+      function validateMessage() {
+        const message2 = document.getElementById("message2").value;
+        const hashInput = document.getElementById("hashInput").value.trim();
+
+        const hash2 = CryptoJS.SHA256(message2).toString(); // Hash dari pesan yang dimasukkan
+
+        // Bandingkan hash input dari sender dengan hash dari pesan verifikator
+        if (hashInput === hash2) {
+          document.getElementById("validity").innerText = "Valid✅"; // Hash cocok
+          document.getElementById("correctHash").innerText = ""; // Bersihkan hash kedua jika valid
+        } else {
+          document.getElementById("validity").innerText = "Tidak Valid❌"; // Hash tidak cocok
+          document.getElementById("correctHash").innerText = "Hash Benar: " + hash2; // Tampilkan hash benar
+        }
+      }
+    </script>
+        <footer style="text-align: center; padding: 20px; background-color: #fffef6; margin-top: 40px;">
+          <p>Kelompok 3 - Keamanan Sistem Informasi | 2024</p>
+          <p>Anggota:</p>
+          <p>Faridah Az-Zahra 5302422015</p>
+          <p>Afriani Fajar Navissaturisqi 5302422021</p>
+          <p>Julia Putri Pertiwi 5302422033</p>
+        </footer>
+      </body>
+    </html>
+    
+  </body>
+</html>

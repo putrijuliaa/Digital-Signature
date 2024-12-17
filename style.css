@@ -1,0 +1,255 @@
+/* Header Navigation */
+/* Mengatur tampilan header yang posisinya tetap di bagian atas dan tampil di seluruh lebar halaman */
+header {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+nav {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+ 
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+nav ul li {
+  font-size: 1rem;
+}
+
+
+
+/* Body and Background */
+/* Mengatur tampilan keseluruhan halaman dengan latar belakang gambar */
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding-top: 80px; /* Menambahkan padding agar tidak tertutup header */
+  background: url('gambar3.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+h2, label, textarea, button, nav ul li, .logo {
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1000px;
+  margin-top: 40px;
+  gap: 80px; /* Menambahkan jarak antara kotak */
+}
+
+.card-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  flex: 1;
+  height: 720px;
+  margin: 0;
+}   
+
+.card-section h2 {
+  color: #000;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.card {
+  flex: 1;
+  width: 100%; /* Pastikan card mengambil seluruh lebar */
+  height: 600px; /* Mengatur tinggi card */
+  min-height: 600px; /* Tinggi minimum card */
+  max-height: 1100px; /* Tinggi maksimum card */
+  background: linear-gradient(135deg, #f79e34, #ff8c00); /* Warna background gradien */
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+  text-align: center;
+  position: relative;
+}
+
+.sender h2, .verification h2 {
+  color: #d3d3d3;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+label {
+  font-size: 1rem;
+  color: #000;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Mengatur tampilan area teks */
+textarea {
+  width: 90%;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 20px;
+  resize: none; /* Mencegah textarea dapat diubah ukurannya */
+  background-color: #eff0e6;
+  color: #000;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+/* Mengatur tampilan tombol */
+button {
+  background-color: #ffda77;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efek ketika tombol di-hover */
+button:hover {
+  background-color: #ffb84d;
+}
+
+/* Mengatur tampilan QR code */
+#qrcode1, #qrcode2 {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#qrcode1 img, #qrcode2 img {
+  max-width: 50%; /* Mengatur agar gambar QR code dapat menyesuaikan ukuran */
+  max-height: 50%; /* Mengatur agar gambar QR code tidak melebihi tinggi maksimal */
+}
+
+/* Mengatur tampilan validitas */
+#validity {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  word-wrap: break-word; /* Memastikan teks hash tidak meluap */
+  max-width: 90%; /* Batas lebar hash */
+}
+
+/* Mengatur tampilan hash */
+#hash1, #hash2, #correctHash {
+  margin-top: 10px;
+  font-size: 13px; /* Ukuran font hash lebih kecil */
+  font-weight: normal;
+  color: #fff;
+  word-wrap: break-word;
+  word-break: break-all;
+  max-width: 90%; /* Batas lebar maksimal hash */
+  font-family: 'Courier New', Courier, monospace; /* Teks bergaya monospasi */
+}
+
+.hash-display {
+  background-color: rgba(51, 51, 51, 0.5); /* Background semi-transparan */
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  word-wrap: break-word;
+  font-size: 0.9rem;
+}
+
+/* Mengatur tombol copy */
+.copy-btn i {
+  font-size: 16px;
+  color: #fff; /* Warna ikon */
+  margin-left: 5px;
+}
+
+.copy-btn:hover i {
+  color: #ffda77; /* Warna ikon saat di-hover */
+}
+
+.copy-btn {
+  margin-left: 10px; /* Jarak antara ikon copy dan hash */
+}
+
+/* Mengatur validitas hash yang benar */
+#correctHash {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #f00;
+  word-wrap: break-word;
+  word-break: break-all;
+  max-width: 90%;
+  text-align: center; /* Teks berada di tengah */
+  padding-left: 20px;
+}
+/* Animasikan saat card disentuh atau di-hover */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animasikan tombol saat disentuh */
+button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover { 
+  transform: scale(1.0);
+}
+
+button:active {
+  transform: scale(0.75);
+}
+
+.copy-btn {
+  transition: transform 0.2s ease;
+}
+
+.copy-btn:hover {
+  transform: scale(1.1);
+}
+
